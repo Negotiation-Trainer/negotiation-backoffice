@@ -1,5 +1,5 @@
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import axios from "axios";
 
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
@@ -20,6 +20,17 @@ const toast = useToast();
 
 const newGame = ref({});
 
+onMounted(() => {
+
+        generateKey();
+        newGame.value.start_date = new Date().toISOString().slice(0, 16);
+        const endDate = new Date();
+        //add 1 hour to the current time
+        endDate.setHours(endDate.getHours() + 1);
+        newGame.value.end_date = new Date(endDate).toISOString().slice(0, 16);
+    }
+);
+
 const onCreateClick = () => {
     if (!validateGameData(newGame.value)) {
         return;
@@ -28,19 +39,27 @@ const onCreateClick = () => {
     //save data
     axios.post(route('game-session.store'), newGame.value)
         .then(response => {
-            toast.add({severity: 'success', summary: 'Success', detail: 'Game session created successfully.', life: 3000});
+            toast.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: 'Game session created successfully. You will be redirected shortly.',
+                life: 3000
+            });
             newGame.value = {};
 
-            let newGameId = response.data.id;
+            let newGameId = response.data.data.id;
             //wait for 3 seconds before redirecting
             setTimeout(() => {
                 window.location.href = route('game-session.show', newGameId);
-            }, 3000);
+            }, 2500);
         })
         .catch(error => {
-            toast.add({severity: 'error', summary: 'Error', detail: 'An error occurred while creating the game session.', life: 3000});
+            console.log(error);
+            toast.add({severity: 'error', summary: 'Error', detail: error.response.data.message, life: 3000});
         });
 }
+
+const generateKey = () => newGame.value.key = Math.random().toString(36).substring(2, 6).toUpperCase();
 
 const validateGameData = (data) => {
     //check if all fields are filled
@@ -48,6 +67,7 @@ const validateGameData = (data) => {
         toast.add({severity: 'error', summary: 'Error', detail: 'Please fill in all fields.', life: 3000});
         return false;
     }
+
 
     //check if start time is before end time
     if (data.start_date > data.end_date) {
@@ -79,14 +99,20 @@ const validateGameData = (data) => {
                         <div class="w-1/3">
                             <div class="flex flex-col gap-2">
                                 <label for="name">Game Session Name</label>
-                                <InputText id="name" required v-model="newGame.name" aria-describedby="name-help"/>
+                                <InputText placeholder="e.g: University Gaming Session..." id="name" required
+                                           v-model="newGame.name" aria-describedby="name-help"/>
                                 <small id="name-help">Enter a descriptive name for this game session.</small>
                             </div>
                             <br>
                             <div class="flex flex-col gap-2">
                                 <label for="key">Game Key</label>
-                                <InputText id="key" v-model="newGame.key" aria-describedby="key-help"/>
-                                <small id="key-help">Enter the passphrase players can use to access this session</small>
+                                <div class="flex flex-row gap-2">
+                                    <!--                                    <InputText disabled id="key" v-model="newGame.key" aria-describedby="key-help"-->
+                                    <!--                                               class="w-1/2"/>-->
+                                    <h1 class="w-1/2 text-center"> {{ newGame.key }}</h1>
+                                    <Button label="New key" outlined @click="generateKey" class="w-1/2"/>
+                                </div>
+                                <small id="key-help">This is what users need to access a game session</small>
                             </div>
                             <br>
                             <div class="flex flex-col gap-2">
