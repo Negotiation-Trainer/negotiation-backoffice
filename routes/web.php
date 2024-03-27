@@ -37,6 +37,8 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/games', [GameDashboardController::class, 'index'])->name('game-sessions');
+    Route::get('/game/create', [GameDashboardController::class, 'create'])->name('game-session.create');
+    Route::post('/game', [GameDashboardController::class, 'store'])->name('game-session.store');
     Route::get('/game/{id}', [GameDashboardController::class, 'show'])->name('game-session.show');
     Route::get('/costs', [GameDashboardController::class, 'costs'])->name('costs');
 
