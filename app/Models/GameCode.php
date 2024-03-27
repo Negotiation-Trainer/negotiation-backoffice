@@ -45,6 +45,6 @@ class GameCode extends Model
     protected function sessionList(): HasMany
     {
         //get all sessions that have used this game key
-        return $this->hasMany(SessionToken::class, 'game_code_id', 'id');
+        return $this->hasMany(SessionToken::class, 'token', 'id');
     }
 }
