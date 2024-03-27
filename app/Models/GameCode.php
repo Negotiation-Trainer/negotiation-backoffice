@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\ItemNotFoundException;
 
+/**
+ * @property mixed $sessionList
+ */
 class GameCode extends Model
 {
     protected $fillable = [
@@ -35,10 +37,13 @@ class GameCode extends Model
         return $this->start_date < now() && $this->end_date > now();
     }
 
+    /**
+     * @throws Exception
+     */
     public function validate(): void
     {
         if (!$this->validateTime()) {
-            throw new \Exception('Game Session ' . $this->key . ' has expired', 410);
+            throw new Exception('Game Session ' . $this->key . ' has expired', 410);
         }
     }
 

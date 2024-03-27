@@ -5,10 +5,11 @@ namespace Database\Seeders;
 use App\Models\Pricing;
 use Illuminate\Database\Seeder;
 
-/**
+/*
  * Seeds the database with the current pricing data from OpenAI.
  * Last checked: 2024-03-27
  */
+
 class PricingSeeder extends Seeder
 {
     public function run(): void
