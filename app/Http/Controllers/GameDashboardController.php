@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GameSessionRequest;
+use App\Models\GameCode;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class GameDashboardController extends Controller
@@ -24,6 +27,24 @@ class GameDashboardController extends Controller
             'session' => $game,
             'tokenList' => $game->sessionList,
             'costs' => $cc->getGameCosts($game)
+        ]);
+    }
+
+    public function create()
+    {
+        return Inertia::render('Games/CreateGame');
+    }
+
+    public function store(GameSessionRequest $request)
+    {
+        $request->validated();
+
+        //store the game
+        $gameCode = GameCode::create($request->all());
+
+        return response()->json([
+            'message' => 'Game created',
+            'data' => $gameCode
         ]);
     }
 
