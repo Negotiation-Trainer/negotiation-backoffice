@@ -52,4 +52,11 @@ class SessionToken extends Model
     {
         return $this->hasMany(PromptHistory::class, 'session_token', 'token');
     }
+
+    public function revoke(): void
+    {
+        $this->expires_at = now()->subYear();
+        $this->save();
+    }
+
 }

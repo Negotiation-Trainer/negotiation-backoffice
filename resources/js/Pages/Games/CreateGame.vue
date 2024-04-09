@@ -15,6 +15,7 @@ import Calendar from "primevue/calendar";
 
 import Toast from "primevue/toast";
 import {useToast} from "primevue/usetoast";
+import NavLink from "@/Components/NavLink.vue";
 
 const toast = useToast();
 
@@ -85,7 +86,12 @@ const validateGameData = (data) => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Create new Game Session</h2>
+            <div class="flex flex-row items-center gap-5">
+                <NavLink :href="route('game-sessions')" class="text-blue-500">
+                    <i class="pi pi-arrow-left mr-5"/>
+                    Back to Game Sessions
+                </NavLink>
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">Create new Game Session</h2></div>
         </template>
         <Toast/>
 
@@ -107,8 +113,6 @@ const validateGameData = (data) => {
                             <div class="flex flex-col gap-2">
                                 <label for="key">Game Key</label>
                                 <div class="flex flex-row gap-2">
-                                    <!--                                    <InputText disabled id="key" v-model="newGame.key" aria-describedby="key-help"-->
-                                    <!--                                               class="w-1/2"/>-->
                                     <h1 class="w-1/2 text-center"> {{ newGame.key }}</h1>
                                     <Button label="New key" outlined @click="generateKey" class="w-1/2"/>
                                 </div>
