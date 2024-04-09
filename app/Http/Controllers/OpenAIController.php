@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PromptRequest;
 use App\Models\PromptHistory;
 use Http;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Log;
 
 class OpenAIController extends Controller
 {
-    public function getOpenAIResponse(Request $request): JsonResponse
+    public function getOpenAIResponse(PromptRequest $request): JsonResponse
     {
         try {
-            $validated = $request->validate([
-                'prompt' => 'required|string',
-            ]);
+            $validated = $request->validated();
 
         } catch (ValidationException $e) {
             return response()->json(['error' => $e->errors()], 400);
@@ -38,7 +38,7 @@ class OpenAIController extends Controller
                     'content' => '
                     Parse all the given sentences into this JSON format. If you are unable to parse certain fields, set the value to null.
                     {
-                        "Target": "(Azaru/Bengali/Cinati)",
+                        "Target": "(Azari/Beluga/Cinatu)",
                         "requestedItem": "Item Name",
                         "RequestedAmount": 0,
                         "OfferedItem": "Item Name",
@@ -64,7 +64,7 @@ class OpenAIController extends Controller
         $outputTokens = $apiResponseData['usage']['completion_tokens'];
         $systemFingerprint = $apiResponseData['system_fingerprint'];
         $model = $apiResponseData['model'];
-        \Log::info('API LOG ID: ' . $apiResponseData['id']);
+        Log::info('API LOG ID: ' . $apiResponseData['id']);
         PromptHistory::create([
             'input' => $inputText,
             'output' => $outputText,

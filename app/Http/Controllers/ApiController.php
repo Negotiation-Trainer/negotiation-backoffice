@@ -40,9 +40,9 @@ class ApiController extends Controller
         } catch (ValidationException $e) {
             return response()->json(['status' => 'error', 'message' => $e->errors()]);
         } catch (ItemNotFoundException $e) {
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 401);
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         } catch (\Exception $e) {
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()], $e->getCode());
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
         }
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GameDashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TokenController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -40,7 +41,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/game/create', [GameDashboardController::class, 'create'])->name('game-session.create');
     Route::post('/game', [GameDashboardController::class, 'store'])->name('game-session.store');
     Route::get('/game/{id}', [GameDashboardController::class, 'show'])->name('game-session.show');
+    Route::patch('/game/{id}', [GameDashboardController::class, 'update'])->name('game-session.update');
     Route::get('/costs', [GameDashboardController::class, 'costs'])->name('costs');
+
+
+    Route::delete('/token/{token}', [TokenController::class, 'revoke'])->name('token.revoke');
 
 });
 
