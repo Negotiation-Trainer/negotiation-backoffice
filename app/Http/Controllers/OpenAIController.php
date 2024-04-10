@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PromptRequest;
 use App\Models\PromptHistory;
-use Http;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+
 use Illuminate\Validation\ValidationException;
-use Log;
+use Illuminate\Support\Facades\Log;
 
 class OpenAIController extends Controller
 {
