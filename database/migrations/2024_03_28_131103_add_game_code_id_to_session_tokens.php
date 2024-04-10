@@ -15,7 +15,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('session_tokens', function (Blueprint $table) {
-            //
+            $table->dropColumn('game_code_id');
         });
     }
 };
