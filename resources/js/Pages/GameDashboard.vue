@@ -5,6 +5,8 @@ import {Head} from '@inertiajs/vue3';
 import DataTable from "primevue/datatable";
 import Column from 'primevue/column';
 import FormatDate from "@/Components/FormatDate.vue";
+import Button from 'primevue/button';
+import NavLink from "@/Components/NavLink.vue";
 
 const props = defineProps({
     gameCodes: {
@@ -27,7 +29,12 @@ const props = defineProps({
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <h1>Session List</h1>
+                        <div class="flex justify-between mb-5">
+                            <h1>Session List</h1>
+                            <NavLink :href="route('game-session.create')">
+                                <Button severity="success" label="New..." icon="pi pi-plus"/>
+                            </NavLink>
+                        </div>
                         <DataTable :value="gameCodes" :paginator="true" :rows="10" :rowsPerPageOptions="[5,10,20]">
                             <Column field="id" header="ID" :sortable="true"></Column>
                             <Column field="name" header="Game Name"></Column>
@@ -48,11 +55,11 @@ const props = defineProps({
                                        class="text-indigo-600 hover:text-indigo-900">View</a>
                                 </template>
                             </Column>
-                                <template #empty>
-                                    <div class="p-4 text-center">
-                                        <p>No game sessions found</p>
-                                    </div>
-                                </template>
+                            <template #empty>
+                                <div class="p-4 text-center">
+                                    <p>No game sessions found</p>
+                                </div>
+                            </template>
                         </DataTable>
                     </div>
                 </div>

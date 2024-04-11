@@ -188,6 +188,6 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
-    'openai_key' => env('OPENAI_API_KEY', null),
+    'openai_key' => env('OPENAI_API_KEY'),
 
 ];
