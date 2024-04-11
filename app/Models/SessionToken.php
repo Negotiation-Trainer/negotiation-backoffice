@@ -3,9 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany};
 
 class SessionToken extends Model
 {
@@ -52,4 +50,11 @@ class SessionToken extends Model
     {
         return $this->hasMany(PromptHistory::class, 'session_token', 'token');
     }
+
+    public function revoke(): void
+    {
+        $this->expires_at = now()->subYear();
+        $this->save();
+    }
+
 }

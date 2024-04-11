@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 
 export default {
     props: {
