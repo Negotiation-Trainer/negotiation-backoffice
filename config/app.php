@@ -5,6 +5,9 @@ use Illuminate\Support\ServiceProvider;
 
 return [
 
+    //HTTPS force
+    'force_https' => env('FORCE_HTTPS', false),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
