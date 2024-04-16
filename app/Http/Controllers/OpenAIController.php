@@ -2,77 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DealRequest;
 use App\Http\Requests\PromptRequest;
+
 use App\Models\PromptHistory;
+use App\Services\AIService;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\JsonResponse;
 
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Log;
 
 class OpenAIController extends Controller
 {
-    public function getOpenAIResponse(PromptRequest $request): JsonResponse
+    protected AIService $AIService;
+
+    /**
+     * @throws \Exception
+     */
+    public function __construct()
     {
-        try {
-            $validated = $request->validated();
+        $apiKey = config('app.openai_key');
+        if ($apiKey === null) throw new \Exception('OpenAI API Key is missing or unreachable');
 
-        } catch (ValidationException $e) {
-            return response()->json(['error' => $e->errors()], 400);
-        }
-
-        $openAIKey = config('app.openai_key');
-
-        if ($openAIKey === null) {
-            return response()->json(['error' => 'OpenAI key not set'], 500);
-        }
-
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $openAIKey,
-            'Content-Type' => 'application/json',
-        ])->post('https://api.openai.com/v1/chat/completions', [
-            'model' => 'gpt-3.5-turbo',
-            'messages' => [
-                [
-                    'role' => 'system',
-                    'content' => '
-                    Parse all the given sentences into this JSON format. If you are unable to parse certain fields, set the value to null.
-                    {
-                        "Target": "(Azari/Beluga/Cinatu)",
-                        "requestedItem": "Item Name",
-                        "RequestedAmount": 0,
-                        "OfferedItem": "Item Name",
-                        "OfferedAmount": 0
-                    }',
-                ],
-                [
-                    'role' => 'user',
-                    'content' => $validated['prompt'],
-                ],
-            ],
-        ]);
-
-
-        $this->logAPIInteraction($request->header('Authorization'), $validated['prompt'], $response->json());
-        return response()->json(['status' => 'success', 'response' => $response->json()['choices'][0]['message']['content']]);
+        $this->AIService = new AIService($apiKey, request()->header('Authorization'));
     }
 
-    private function logAPIInteraction(string $sessionToken, string $inputText, array $apiResponseData): void
+    public function acceptDeal(DealRequest $request)
     {
-        $outputText = $apiResponseData['choices'][0]['message']['content'];
-        $inputTokens = $apiResponseData['usage']['prompt_tokens'];
-        $outputTokens = $apiResponseData['usage']['completion_tokens'];
-        $systemFingerprint = $apiResponseData['system_fingerprint'];
-        $model = $apiResponseData['model'];
-        Log::info('API LOG ID: ' . $apiResponseData['id']);
-        PromptHistory::create([
-            'input' => $inputText,
-            'output' => $outputText,
-            'input_tokens' => $inputTokens,
-            'output_tokens' => $outputTokens,
-            'system_fingerprint' => $systemFingerprint,
-            'gpt_model' => $model,
-            'session_token' => $sessionToken,
-        ]);
+        $validated = $request->validated();
+
+        $response = $this->AIService->acceptDealPrompt($validated['prompt']);
+        return response()->json(['message' => $response]);
     }
+
+    public function rejectDeal(DealRequest $request)
+    {
+        $validated = $request->validated();
+
+        $response = $this->AIService->rejectDealPrompt($validated['prompt']);
+        return response()->json(['message' => $response]);
+    }
+
+    public function convertToTrade(PromptRequest $request): JsonResponse
+    {
+        $validated = $request->validated();
+
+        $response = $this->AIService->jsonPrompt($validated['prompt']);
+        return response()->json(['message' => $response]);
+    }
+
+
 }
