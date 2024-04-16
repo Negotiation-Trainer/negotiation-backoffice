@@ -22,13 +22,13 @@ class AIService
         $this->requestToken = $requestToken;
     }
 
-    public function jsonPrompt(string $userPrompt): string
+    public function jsonPrompt(string $userPrompt): array
     {
         $response = $this->performApiRequest($this->model, Prompts::jsonPrompt(), $userPrompt);
 
         $this->logAPIInteraction($this->requestToken, $userPrompt, $response);
 
-        return $this->getAIResponse($response);
+        return json_decode($this->getAIResponse($response), true);
     }
 
     public function acceptDealPrompt(string $userPrompt): string

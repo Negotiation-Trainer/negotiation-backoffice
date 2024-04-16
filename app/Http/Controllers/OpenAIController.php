@@ -48,7 +48,7 @@ class OpenAIController extends Controller
         $validated = $request->validated();
 
         $response = $this->AIService->jsonPrompt($validated['prompt']);
-        return response()->json(['message' => $response]);
+        return response()->json($response);
     }
 
 
