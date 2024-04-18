@@ -9,8 +9,8 @@ class Prompts
         return
             'Parse all the given sentences into this JSON format. If you are unable to parse certain fields, set the value to null.
         {
-            "Target": "(Azari/Beluga/Cinatu)",
-            "requestedItem": "Item Name",
+            "TargetName": "(Azari/Beluga/Cinatu)",
+            "RequestedItem": "Item Name",
             "RequestedAmount": 0,
             "OfferedItem": "Item Name",
             "OfferedAmount": 0
@@ -23,7 +23,7 @@ class Prompts
             'Accept the deal with the following terms:
         {
             "Target": "(Azari/Beluga/Cinatu)",
-            "requestedItem": "Item Name",
+            "RequestedItem": "Item Name",
             "RequestedAmount": 0,
             "OfferedItem": "Item Name",
             "OfferedAmount": 0
@@ -36,7 +36,7 @@ class Prompts
             'Reject the deal with the following terms:
         {
             "Target": "(Azari/Beluga/Cinatu)",
-            "requestedItem": "Item Name",
+            "RequestedItem": "Item Name",
             "RequestedAmount": 0,
             "OfferedItem": "Item Name",
             "OfferedAmount": 0
