@@ -16,7 +16,15 @@ class SessionToken extends Model
 
     public function isExpired(): bool
     {
-        return $this->expires_at < now();
+        if ($this->expires_at < now()) {
+            return true;
+        }
+
+        if ($this->gameCode->validateTime()) {
+            return false;
+        }
+
+        return true;
     }
 
     public function updateLastUsedAt(): void
