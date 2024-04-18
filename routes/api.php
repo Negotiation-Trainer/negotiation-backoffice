@@ -24,7 +24,12 @@ Route::group(['prefix' => 'v1'], function () {
             return response()->json(['status' => 'success', 'message' => 'You are authenticated!']);
         });
 
-        Route::post('/chat', [OpenAIController::class, 'getOpenAIResponse']);
+        Route::prefix('chat')->group(function () {
+            Route::post('/convert-to-trade', [OpenAIController::class, 'convertToTrade'])->name('chat.convert-to-trade');
+            Route::post('/accept-deal', [OpenAIController::class, 'acceptDeal']);
+            Route::post('/reject-deal', [OpenAIController::class, 'rejectDeal']);
+        });
+
     });
 });
 

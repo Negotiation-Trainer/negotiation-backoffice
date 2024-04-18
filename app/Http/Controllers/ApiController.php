@@ -38,11 +38,11 @@ class ApiController extends Controller
             ]);
 
         } catch (ValidationException $e) {
-            return response()->json(['status' => 'error', 'message' => $e->errors()]);
+            return response()->json(['status' => 'error', 'message' => $e->errors()], 401);
         } catch (ItemNotFoundException $e) {
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 401);
         } catch (\Exception $e) {
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()]);
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()], $e->getCode());
         }
     }
 }
