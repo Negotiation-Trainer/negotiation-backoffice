@@ -11,7 +11,7 @@ class TokenMiddleware
     public function handle(Request $request, Closure $next)
     {
         //check if request has token
-        if (!$request->hasHeader('Authorization')) {
+        if (!$request->hasHeader('Authorization') || !$request->header('Authorization')) {
             return response()->json(['status' => 'error', 'message' => 'No authorization token given'], 401);
         }
 
