@@ -21,7 +21,7 @@ class OpenAIController extends Controller
      * @return void
      * @throws Exception
      */
-    public function construct()
+    public function construct(): void
     {
         $apiKey = config('app.openai_key');
         if ($apiKey === null) throw new Exception('OpenAI API Key is missing or unreachable');
@@ -35,7 +35,7 @@ class OpenAIController extends Controller
         $this->construct();
         $validated = $request->validated();
 
-        $response = $this->AIService->acceptDealPrompt($validated['prompt']);
+        $response = $this->AIService->acceptDealPrompt($validated);
         return response()->json(['message' => $response]);
     }
 
@@ -44,7 +44,7 @@ class OpenAIController extends Controller
         $this->construct();
         $validated = $request->validated();
 
-        $response = $this->AIService->rejectDealPrompt($validated['prompt']);
+        $response = $this->AIService->rejectDealPrompt($validated);
         return response()->json(['message' => $response]);
     }
 

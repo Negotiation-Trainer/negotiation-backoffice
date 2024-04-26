@@ -12,9 +12,9 @@ class DealRequest extends FormRequest
             'speakerStyle' => 'required|string|max:255',
             'reason' => 'required|string|max:255',
             'RequestedItem' => 'required|string|max:255',
-            'RequestedAmount' => 'required|string|max:255',
+            'RequestedAmount' => 'required|integer|max:255',
             'OfferedItem' => 'required|string|max:255',
-            'OfferedAmount' => 'required|string|max:255',
+            'OfferedAmount' => 'required|integer|max:255',
         ];
     }
 }

@@ -31,20 +31,20 @@ class AIService
         return json_decode($this->getAIResponse($response), true);
     }
 
-    public function acceptDealPrompt(string $userPrompt): string
+    public function acceptDealPrompt(array $dealData): string
     {
-        $response = $this->performApiRequest($this->model, Prompts::acceptDealPrompt(), $userPrompt);
+        $response = $this->performApiRequest($this->model, Prompts::dealSystemPrompt(), Prompts::acceptDealPrompt($dealData));
 
-        $this->logAPIInteraction($this->requestToken, $userPrompt, $response);
+        $this->logAPIInteraction($this->requestToken, json_encode($dealData), $response);
 
         return $this->getAIResponse($response);
     }
 
-    public function rejectDealPrompt(string $userPrompt): string
+    public function rejectDealPrompt(array $dealData): string
     {
-        $response = $this->performApiRequest($this->model, Prompts::rejectDealPrompt(), $userPrompt);
+        $response = $this->performApiRequest($this->model, Prompts::dealSystemPrompt(), Prompts::rejectDealPrompt($dealData));
 
-        $this->logAPIInteraction($this->requestToken, $userPrompt, $response);
+        $this->logAPIInteraction($this->requestToken, json_encode($dealData), $response);
 
         return $this->getAIResponse($response);
     }
