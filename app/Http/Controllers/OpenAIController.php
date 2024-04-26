@@ -10,7 +10,6 @@ use App\Services\AIService;
 use Exception;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 
 class OpenAIController extends Controller
