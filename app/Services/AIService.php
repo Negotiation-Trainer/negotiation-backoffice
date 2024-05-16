@@ -92,4 +92,13 @@ class AIService
             'session_token' => $sessionToken,
         ]);
     }
+
+    public function counterOfferPrompt(array $dealData): string
+    {
+        $response = $this->performApiRequest($this->model, Prompts::dealSystemPrompt(), Prompts::counterOfferPrompt($dealData));
+
+        $this->logAPIInteraction($this->requestToken, json_encode($dealData), $response);
+
+        return $this->getAIResponse($response);
+    }
 }

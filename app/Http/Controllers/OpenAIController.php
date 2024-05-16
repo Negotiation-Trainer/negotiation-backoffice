@@ -57,5 +57,19 @@ class OpenAIController extends Controller
         return response()->json($response);
     }
 
+    /**
+     * Generate a counter offer dialogue based on the user's input
+     *
+     * @return JsonResponse
+     */
+    public function counterOffer(DealRequest $request): JsonResponse
+    {
+        $this->construct();
+        $validated = $request->validated();
+
+        $response = $this->AIService->counterOfferPrompt($validated);
+        return response()->json(['message' => $response]);
+    }
+
 
 }

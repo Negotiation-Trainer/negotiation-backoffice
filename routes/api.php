@@ -28,6 +28,8 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/convert-to-trade', [OpenAIController::class, 'convertToTrade'])->name('chat.convert-to-trade');
             Route::post('/accept-deal', [OpenAIController::class, 'acceptDeal']);
             Route::post('/reject-deal', [OpenAIController::class, 'rejectDeal']);
+
+            Route::post('/counter-offer', [OpenAIController::class, 'counterOffer']);
         });
 
     });
