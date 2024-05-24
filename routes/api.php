@@ -30,6 +30,9 @@ Route::group(['prefix' => 'v1'], function () {
             Route::post('/reject-deal', [OpenAIController::class, 'rejectDeal']);
 
             Route::post('/counter-offer', [OpenAIController::class, 'counterOffer']);
+
+            //Converts a trade offer into a chat dialogue (used for AI responses)
+            Route::post('/convert-to-chat', [OpenAIController::class, 'convertToChat'])->name('chat.convert-to-chat');
         });
 
     });

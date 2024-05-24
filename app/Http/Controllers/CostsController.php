@@ -11,8 +11,8 @@ use Illuminate\Http\Request;
 class CostsController extends Controller
 {
 
-    private const GPT_3_5_TURBO_0125 = 'gpt-3.5-turbo-0125';
-    private const GPT_4_O = 'gpt-4o';
+    private const GPT_3_5_TURBO_0125 = 'gpt-3.5';
+    private const GPT_4_O = 'gpt-4';
 
     /**
      * Calculate the total cost of the prompt history
@@ -103,7 +103,7 @@ class CostsController extends Controller
     private
     function getTokenTotal(string $gptModel, string $column)
     {
-        return PromptHistory::where('gpt_model', $gptModel)
+        return PromptHistory::where('gpt_model', 'LIKE', $gptModel . '%')
             ->sum($column . '_tokens');
     }
 
@@ -111,7 +111,7 @@ class CostsController extends Controller
     function getPricing(string $model, string $column): float
     {
         $column .= '_price';
-        return Pricing::select($column)->where('model', $model)->first()->$column;
+        return Pricing::select($column)->where('model', 'LIKE', $model . '%')->first()->$column;
     }
 
     /**

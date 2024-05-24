@@ -13,6 +13,7 @@ class Prompts
             Wood, Lenses, Clay, Gold, Steel, Insulation, Fertilizer, Stone
         {
             "TargetName": "(Azari/Beluga/Cinatu)",
+            "OriginName": "Azari",
             "RequestedItem": "Item Name",
             "RequestedAmount": 0,
             "OfferedItem": "Item Name",
@@ -22,7 +23,7 @@ class Prompts
 
     public static function dealSystemPrompt(): string
     {
-        return 'You are a human player in a negotiation game responding to another player. Do not use special characters or emoji in your response.';
+        return 'You are a human player in a negotiation game responding to another player. Do not use special characters, escape characters, newlines (\n) or emoji in your response. Always respond in English';
     }
 
     public static function acceptDealPrompt(array $dealData): string
@@ -63,6 +64,16 @@ class Prompts
             . $dealData['RequestedAmount'] . " " . $dealData['RequestedItem'] . ". Write a response to the tribe leader in a " . $dealData['speakerStyle']
             . " tone. Mention that you are declining their offer and presenting the above as an alternative in the speaker's style.
             Be creative in your response, but keep it limited to three sentences.";
+    }
+
+    public static function tradeChatPrompt(array $dealData): string
+    {
+        //the trade chat prompt is used to generate a chat dialogue between the AI and the human player.
+        //It generates a chat dialogue based on the trade offer to simulate a negotiation.
+        return "Generate a message that you, leader of the " . $dealData['originator'] . " will use to tell another human player (from the "
+            . $dealData['target'] . " about what you are offering them. You are offering: "
+            . $dealData['OfferedAmount'] . " " . $dealData['OfferedItem'] . " in exchange for " . $dealData['RequestedAmount'] . " " . $dealData['RequestedItem']
+            . ". Use a " . $dealData['speakerStyle'] . " tone in your dialogue.";
     }
 
 }
