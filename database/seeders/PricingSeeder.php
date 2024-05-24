@@ -25,9 +25,9 @@ class PricingSeeder extends Seeder
                 'output_price' => 0.0015
             ],
             [
-                'model' => 'gpt-4-turbo',
-                'input_price' => 0.0100,
-                'output_price' => 0.0300
+                'model' => 'gpt-4o',
+                'input_price' => 0.0050,
+                'output_price' => 0.0150
             ]
         ];
 
