@@ -9,11 +9,12 @@ class Prompts
         return
             'Parse all the given sentences into this JSON format. If you are unable to parse certain fields, set the value to null.
             The amounts should be clamped between 0 and 10. If the amount is beyond this range, set it to the nearest valid value.
+            Do not use special characters, escape characters, newlines (\n), and do not format the JSON using backticks (`). Just give the JSON object.
             The following items are valid for RequestedItem and OfferedItem. Try to match the item as closely as possible to one of these:
             Wood, Lenses, Clay, Gold, Steel, Insulation, Fertilizer, Stone
         {
-            "TargetName": "(Azari/Beluga/Cinatu)",
-            "OriginName": "Azari",
+            "TargetName": "(Azari/Beluga/Cinatu)", //Cinatu may not always be recognised. If you hear something similar, fill in Cinatu (e.g: tribe see or sona tu etc)
+            "OriginName": "Azari", //default is Azari
             "RequestedItem": "Item Name",
             "RequestedAmount": 0,
             "OfferedItem": "Item Name",
@@ -41,7 +42,7 @@ class Prompts
         //TODO: Implement the tribe name
         $tribe = "Azari";
         return
-            $tribe . ' requested ' . $dealData['RequestedAmount'] . ' ' . $dealData['RequestedItem'] . ' in exchange for your ' . $dealData['OfferedAmount'] . ' ' . $dealData['OfferedItem'] .
+            $tribe . ' requested ' . $dealData['RequestedAmount'] . ' ' . $dealData['RequestedItem'] . ' in exchange for their ' . $dealData['OfferedAmount'] . ' ' . $dealData['OfferedItem'] .
             'Write a response to reject the following deal from the ' . $tribe . ' tribe leader. Use a ' . $dealData['speakerStyle'] . ' tone in your response.
             You are refusing the deal for the following reason: ' . $dealData['reason'] . '. Include this reason in your response.';
     }

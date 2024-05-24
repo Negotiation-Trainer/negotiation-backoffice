@@ -61,8 +61,8 @@ class AIService
 
     private function getAIResponse(array $request): string
     {
-        //filter out newlines and special characters
-        return preg_replace('/[\x00-\x1F\x80-\xFF]/', ' ', $request['choices'][0]['message']['content']);
+        //filter out newlines
+        return str_replace("\n", "", $request['choices'][0]['message']['content']);
     }
 
 
