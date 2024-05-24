@@ -72,7 +72,7 @@ class OpenAIController extends Controller
         return response()->json(['message' => $response]);
     }
 
-    public function convertToChat(TradeRequest $request)
+    public function convertToChat(TradeRequest $request): JsonResponse
     {
         $this->construct();
         $validated = $request->validated();

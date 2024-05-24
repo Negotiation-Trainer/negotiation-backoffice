@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\GameCode;
 use App\Models\Pricing;
 use App\Models\PromptHistory;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 
 class CostsController extends Controller
 {

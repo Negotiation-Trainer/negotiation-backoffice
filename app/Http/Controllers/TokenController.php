@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\SessionToken;
+use Illuminate\Http\JsonResponse;
 
 class TokenController extends Controller
 {
-    public function revoke(SessionToken $token)
+    public function revoke(SessionToken $token): JsonResponse
     {
         $token->revoke();
 
