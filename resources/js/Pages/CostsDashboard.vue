@@ -25,7 +25,7 @@ const props = defineProps({
 
     <AuthenticatedLayout>
         <template #header>
-            <h0 class="font-semibold text-xl text-gray-800 leading-tight">Costs</h0>
+            <h1 class="font-semibold text-xl text-gray-800 leading-tight">Costs</h1>
         </template>
 
         <div class="py-12">

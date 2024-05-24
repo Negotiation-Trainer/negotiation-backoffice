@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\GameCode;
 use App\Models\SessionToken;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\ItemNotFoundException;
@@ -12,7 +13,7 @@ use Illuminate\Validation\ValidationException;
 class ApiController extends Controller
 {
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function authenticateGameSession(Request $request): JsonResponse
     {
@@ -41,7 +42,7 @@ class ApiController extends Controller
             return response()->json(['status' => 'error', 'message' => $e->errors()], 401);
         } catch (ItemNotFoundException $e) {
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 401);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], $e->getCode());
         }
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DealRequest;
 use App\Http\Requests\PromptRequest;
 
+use App\Http\Requests\TradeRequest;
 use App\Services\AIService;
 
 use Exception;
@@ -23,7 +24,7 @@ class OpenAIController extends Controller
      */
     public function construct(): void
     {
-        $apiKey = config('app.openai_key');
+        $apiKey = config('openai.api_key');
         if ($apiKey === null) throw new Exception('OpenAI API Key is missing or unreachable');
 
         $this->AIService = new AIService($apiKey, request()->header('Authorization'));
@@ -71,5 +72,14 @@ class OpenAIController extends Controller
         return response()->json(['message' => $response]);
     }
 
+    public function convertToChat(TradeRequest $request): JsonResponse
+    {
+        $this->construct();
+        $validated = $request->validated();
+
+        $response = $this->AIService->tradeChatPrompt($validated);
+        return response()->json(['message' => $response]);
+
+    }
 
 }

@@ -187,7 +187,4 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
-
-    'openai_key' => env('OPENAI_API_KEY'),
-
 ];

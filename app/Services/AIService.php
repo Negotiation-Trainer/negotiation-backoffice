@@ -13,13 +13,14 @@ class AIService
 
     protected string $requestToken;
 
-    protected string $model = 'gpt-3.5-turbo'; //Default for now.
+    protected string $model;
     protected string $apiUrl = 'https://api.openai.com/v1/chat/completions';
 
     public function __construct(string $apiKey, string $requestToken)
     {
         $this->apiKey = $apiKey;
         $this->requestToken = $requestToken;
+        $this->model = config('openai.default_model');
     }
 
     public function jsonPrompt(string $userPrompt): array
@@ -49,9 +50,19 @@ class AIService
         return $this->getAIResponse($response);
     }
 
+    public function tradeChatPrompt(array $dealData): string
+    {
+        $response = $this->performApiRequest($this->model, Prompts::dealSystemPrompt(), Prompts::tradeChatPrompt($dealData));
+
+        $this->logAPIInteraction($this->requestToken, json_encode($dealData), $response);
+
+        return $this->getAIResponse($response);
+    }
+
     private function getAIResponse(array $request): string
     {
-        return $request['choices'][0]['message']['content'];
+        //filter out newlines
+        return str_replace("\n", "", $request['choices'][0]['message']['content']);
     }
 
 

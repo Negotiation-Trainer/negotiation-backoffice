@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\SessionToken;
 use Closure;
+use Exception;
 use Illuminate\Http\Request;
 
 class TokenMiddleware
@@ -32,7 +33,7 @@ class TokenMiddleware
         try {
             //check if the game session is still active
             $sessionToken->gameCode->validate();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], $e->getCode());
         }
         //update last used at
