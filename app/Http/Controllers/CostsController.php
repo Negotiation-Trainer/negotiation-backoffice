@@ -12,7 +12,8 @@ class CostsController extends Controller
 {
 
     private const GPT_3_5_TURBO_0125 = 'gpt-3.5-turbo-0125';
-    private const GPT_4_TURBO = 'gpt-4-turbo';
+    private const GPT_4_O = 'gpt-4o';
+
     /**
      * Calculate the total cost of the prompt history
      *
@@ -70,15 +71,15 @@ class CostsController extends Controller
         return $this->total(
             $this->calculate($this->getPricing(self::GPT_3_5_TURBO_0125, 'input'), $gpt3Input),
             $this->calculate($this->getPricing(self::GPT_3_5_TURBO_0125, 'output'), $gpt3Output),
-            $this->calculate($this->getPricing(self::GPT_4_TURBO, 'input'), $gpt4Input),
-            $this->calculate($this->getPricing(self::GPT_4_TURBO, 'output'), $gpt4Output)
+            $this->calculate($this->getPricing(self::GPT_4_O, 'input'), $gpt4Input),
+            $this->calculate($this->getPricing(self::GPT_4_O, 'output'), $gpt4Output)
         );
     }
 
     private
     function getCosts(bool $isGpt3, bool $isInput): float
     {
-        $gptModel = $isGpt3 ? self::GPT_3_5_TURBO_0125 : self::GPT_4_TURBO; // gpt-3.5-turbo-0125 or gpt4-turbo
+        $gptModel = $isGpt3 ? self::GPT_3_5_TURBO_0125 : self::GPT_4_O; // gpt-3.5-turbo-0125 or gpt-4o
         $column = ($isInput ? 'input' : 'output'); // input or output
 
         return $this->getCostsFromTokens($gptModel, $column);
