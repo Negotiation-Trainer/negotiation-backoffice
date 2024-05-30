@@ -10,8 +10,8 @@ class TradeRequest extends FormRequest
     {
         return [
             'speakerStyle' => 'required|string|max:255',
-            'target' => 'required|string|max:255',
-            'originator' => 'required|string|max:255',
+            'targetName' => 'required|string|max:255',
+            'originName' => 'required|string|max:255',
             'RequestedItem' => 'required|string|max:255',
             'RequestedAmount' => 'required|integer|max:255',
             'OfferedItem' => 'required|string|max:255',

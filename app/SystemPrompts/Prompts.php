@@ -71,8 +71,8 @@ class Prompts
     {
         //the trade chat prompt is used to generate a chat dialogue between the AI and the human player.
         //It generates a chat dialogue based on the trade offer to simulate a negotiation.
-        return "Generate a message that you, leader of the " . $dealData['originator'] . " will use to tell another human player (from the "
-            . $dealData['target'] . " about what you are offering them. You are offering: "
+        return "Generate a message that you, leader of the " . $dealData['originName'] . " will use to tell another human player (from the "
+            . $dealData['targetName'] . " tribe) about what you are offering them. You are offering: "
             . $dealData['OfferedAmount'] . " " . $dealData['OfferedItem'] . " in exchange for " . $dealData['RequestedAmount'] . " " . $dealData['RequestedItem']
             . ". Use a " . $dealData['speakerStyle'] . " tone in your dialogue.";
     }
