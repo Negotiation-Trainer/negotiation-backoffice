@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\GameSessionRequest;
 use App\Http\Requests\GameSessionUpdateRequest;
+use App\Http\Requests\UpdateGameConfigRequest;
 use App\Models\GameCode;
+use App\Services\GameService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
@@ -90,6 +92,29 @@ class GameDashboardController extends Controller
 
         return Inertia::render('CostsDashboard', [
             'costs' => $costs
+        ]);
+    }
+
+    public function config(string $id): InertiaResponse
+    {
+        return Inertia::render('Games/GameConfiguration', [
+            'game' => GameCode::find($id)
+        ]);
+    }
+
+    public function updateConfig(UpdateGameConfigRequest $request, string $id, GameService $gameService): JsonResponse
+    {
+        $validated = $request->validated();
+
+        try {
+            $gameService->saveConfig($validated['game_configuration'], $id);
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Error updating game configuration: ' . $e->getMessage()
+            ], 500);
+        }
+
+        return response()->json([
+            'message' => 'Game configuration updated'
         ]);
     }
 }

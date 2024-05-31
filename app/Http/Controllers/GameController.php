@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\ItemNotFoundException;
 use Illuminate\Validation\ValidationException;
 
-class ApiController extends Controller
+class GameController extends Controller
 {
     /**
      * @throws Exception
@@ -45,5 +45,25 @@ class ApiController extends Controller
         } catch (Exception $e) {
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], $e->getCode());
         }
+    }
+
+    /**
+     * Returns the JSON Game Configuration
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function gameConfig(Request $request): JsonResponse
+    {
+        $token = $request->header('Authorization');
+
+        //use the token to find the game session
+        $game = SessionToken::where('token', $token)->first()->gameCode;
+
+        return response()->json([
+            'status' => 'success',
+            'game_code' => $game->key,
+            'game_configuration' => json_decode($game->game_configuration, true)
+        ]);
     }
 }
