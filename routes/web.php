@@ -42,6 +42,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/game', [GameDashboardController::class, 'store'])->name('game-session.store');
     Route::get('/game/{id}', [GameDashboardController::class, 'show'])->name('game-session.show');
     Route::patch('/game/{id}', [GameDashboardController::class, 'update'])->name('game-session.update');
+
+    Route::get('/game/{id}/config', [GameDashboardController::class, 'config'])->name('game-session.config');
+    Route::patch('/game/{id}/config', [GameDashboardController::class, 'updateConfig'])->name('game-session.config.update');
+
     Route::get('/costs', [GameDashboardController::class, 'costs'])->name('costs');
 
 

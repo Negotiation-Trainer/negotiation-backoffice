@@ -16,6 +16,7 @@ class GameCode extends Model
         'key',
         'start_date',
         'end_date',
+        'game_configuration'
     ];
 
     public static function attempt($key): bool

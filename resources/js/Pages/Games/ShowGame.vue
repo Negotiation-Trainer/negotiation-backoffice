@@ -11,6 +11,7 @@ import Button from "primevue/button";
 import {ref} from "vue";
 import InputText from "primevue/inputtext";
 import {useToast} from "primevue/usetoast";
+import NavLink from "@/Components/NavLink.vue";
 
 const toast = useToast();
 
@@ -107,7 +108,8 @@ const revokeToken = (tokenId) => {
                                     <p>Ends on:
                                         <FormatDate :timestamp="session.end_date"/>
                                     </p>
-                                    <Button label="Edit" @click="startEditing" class="p-button-primary mt-4"/>
+                                    <Button label="Edit Session Details" @click="startEditing"
+                                            class="p-button-primary mt-4"/>
                                 </div>
                                 <div v-else>
                                     <h2>Edit session</h2>
@@ -144,6 +146,9 @@ const revokeToken = (tokenId) => {
                                             class="p-button-primary mt-4 mr-4"/>
                                     <Button label="Cancel" @click="cancelEditing" class="p-button-secondary mt-4"/>
                                 </div>
+                                <NavLink :href="route('game-session.config', session.id)">
+                                    <Button outlined label="AI Configuration" class="p-button-primary mt-4"/>
+                                </NavLink>
                                 <Divider/>
                                 <br>
                                 <h1>Total costs: $ {{ costs }} USD</h1>

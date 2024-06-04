@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\GameController;
+
 use App\Http\Controllers\OpenAIController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,12 +18,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'v1'], function () {
-    Route::post('/authenticate', [ApiController::class, 'authenticateGameSession']);
+    Route::post('/authenticate', [GameController::class, 'authenticateGameSession']);
 
     Route::middleware('token')->group(function () {
-        Route::post('/auth', function (Request $request) {
+        Route::post('/auth', function () {
             return response()->json(['status' => 'success', 'message' => 'You are authenticated!']);
         });
+
+        Route::post('/game-config', [GameController::class, 'gameConfig']);
 
         Route::prefix('chat')->group(function () {
             Route::post('/convert-to-trade', [OpenAIController::class, 'convertToTrade'])->name('chat.convert-to-trade');
@@ -37,6 +40,3 @@ Route::group(['prefix' => 'v1'], function () {
 
     });
 });
-
-
-

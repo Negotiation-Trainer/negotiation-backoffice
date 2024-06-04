@@ -9,6 +9,8 @@ class DealRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'targetName' => 'required|string|max:255',
+            'originName' => 'required|string|max:255',
             'speakerStyle' => 'required|string|max:255',
             'reason' => 'required|string|max:255',
             'RequestedItem' => 'required|string|max:255',
