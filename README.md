@@ -1,66 +1,57 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<img src="https://github.com/Negotiation-Trainer/negotiation-trainer/blob/a1cf9afacd9900871d50bc5115f7474f1c6a1523/Assets/Connor's%20Paradise%20Logo.png?raw=true" width="200px" alt=""/>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Connor's Paradise Negotiation Trainer - Backoffice Website
+*Based on [Connor Paradise by The Negotiation Challenge](https://professionals.thenegotiationchallenge.org/downloads/connor-paradise/)*
+## General Information
+![GitHub last commit](https://img.shields.io/github/last-commit/Negotiation-Trainer/negotiation-backoffice) ![GitHub License](https://img.shields.io/github/license/Negotiation-Trainer/negotiation-backoffice)
 
-## About Laravel
+### Overview
+The Negotiation Backoffice is used to grant AI conversations to the Unity Game. The backoffice is a web application that allows the game administrator to manage the game settings, create new games, and view the game results. The backoffice is built using Laravel and Vue.js.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Repository Information
+This repository is the backoffice website for the game. The backoffice is a web application that allows the game administrator to manage the game settings, create new games, and view the game results. The backoffice is built using Laravel and Vue.js
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The game repository itself can be found [here](https://github.com/Negotiation-Trainer/negotiation-trainer), as well as more information about the game.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## 🛠️ Tech Stack
+- Laravel
+- Vue.js
+- MySQL
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🚀 Features
+- Create new games
+- Manage game settings
+- View game results
+- View AI budgets and costs
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🛠️ Getting Started
+To get a local copy up and running follow these simple steps.
+1. Clone the repository
+2. Install the dependencies using `composer install` and `npm install`
+3. Create a new database and configure the .env file, you can run `cp .env.example .env` to create a new .env file. More information about the database configuration can be found [here](https://laravel.com/docs/10.x/database)
+4. Run the migrations using `php artisan migrate`
+5. Run the server using `php artisan serve`
+6. Build the front-end using `npm run build` or run the development server using `npm run dev`
+7. Access the website at `http://localhost:8000`
+8. You'll see a setup page, where you can create a new admin user
+9. You can now access the backoffice using the credentials you just created. You can now create new games, manage game settings, and view costs.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+You can also deploy this to a server, more information about deploying a Laravel application can be found [here](https://laravel.com/docs/10.x/deployment)
+The build workflow for this repository shows the steps to deploy the application to a server, in this case to an Azure App Service.
 
-## Laravel Sponsors
+## 🍰 Contributing
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Before contributing, please read the [code of conduct](CODE_OF_CONDUCT.md).
 
-### Premium Partners
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+1. Fork the Project
+2. Create your Feature Branch `(git checkout -b feature/AmazingFeature)`
+3. Commit your Changes `(git commit -m 'Add some AmazingFeature')` (We would suggest using [atomic commits](https://dev.to/this-is-learning/the-power-of-atomic-commits-in-git-how-and-why-to-do-it-54mn) 😉)
+4. Push to the Branch `(git push origin feature/AmazingFeature)`
+5. Open a Pull Request
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## ➤ License
+Distributed under the GPL-3.0 License. See [LICENSE](LICENSE) for more information.
